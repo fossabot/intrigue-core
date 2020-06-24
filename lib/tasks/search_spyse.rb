@@ -44,7 +44,7 @@ class SearchSpyse < BaseTask
   def search_ip_reputation(entity_name, headers)
 
     # Set the URL for ip data
-    url = "https://api.spyse.com/v2/data/ip?limit=100&ip=#{entity_name}"
+    url = "https://api.spyse.com/v3/data/ip?limit=100&ip=#{entity_name}"
 
     # make the request
     response = http_get_body(url,nil,headers)
@@ -78,7 +78,7 @@ class SearchSpyse < BaseTask
   def search_open_ports entity_name, headers
 
     # Set the URL for ip open ports
-    url2 = "https://api.spyse.com/v2/data/ip/port?limit=100&ip=#{entity_name}"
+    url2 = "https://api.spyse.com/v3/data/ip/port?limit=100&ip=#{entity_name}"
 
     # make the request
     response2 = http_get_body(url2,nil,headers)
