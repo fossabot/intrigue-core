@@ -113,6 +113,18 @@ module Task
     matching_urls.size.times.map {|x| matching_urls.pop }
   end
 
+  def connect_socket(host, port)
+
+    begin
+      socket = TCPSocket.open(host, port.to_i)
+    rescue SocketError => e
+      _log_error "Error connecting to target #{host} on port #{port}: #{e}"
+    rescue Exception => e
+      _log_error "Error connecting to target #{host} on port #{port}: #{e}"
+    end
+  end
+
+  
   # See: https://raw.githubusercontent.com/zendesk/ruby-kafka/master/lib/kafka/ssl_socket_with_timeout.rb
   def connect_ssl_socket(hostname, port, timeout=15, max_attempts=3)
     # Create a socket and connect
