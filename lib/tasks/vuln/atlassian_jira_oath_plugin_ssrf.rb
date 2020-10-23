@@ -9,9 +9,7 @@ class AtlassianJiraOauthPluginSsrf < BaseTask
       :identifiers => [{ "cve" =>  "TODO" }],
       :authors => ["jcran"],
       :description => "SSRF in jira oauth plugin",
-      :references => [
-        "TODO"
-      ],
+      :references => [],
       :type => "vuln_check",
       :passive => false,
       :allowed_types => ["Uri"],

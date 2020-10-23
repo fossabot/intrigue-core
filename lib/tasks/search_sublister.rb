@@ -39,6 +39,11 @@ class SearchSublister < BaseTask
       end
 
       sublister_domains = JSON.parse(response)
+      unless sublister_domains
+        _log_error "Empty response"
+        return
+      end
+
       _log_good "Got sublister domains: #{sublister_domains}"
       sublister_domains.each do |d|
 
@@ -47,7 +52,7 @@ class SearchSublister < BaseTask
           next unless d =~ /#{opt_extract_pattern}/
         end
 
-        _create_entity("DnsRecord", {"name" => "#{d}"})
+        create_dns_entity_from_string d
 
       end
     rescue JSON::ParserError => e
