@@ -16,6 +16,13 @@ module System
     def start_task(queue, project, existing_scan_result_id, task_name, entity, depth,
           options=[], handlers=[], machine_name="external_discovery_light_active", auto_enrich=true, auto_scope=false)
 
+      # check if task is ruclei task, and handle accordingly
+      if task_name =~ /^ruclei\/.*/
+        template_name = task_name.split("/")[1]
+        task_name = "ruclei_runner"
+        options = [{name: "template", regex: "filename", value: template_name}]
+      end
+      
       # Create the task result, and associate our entity and options
       logger = Intrigue::Core::Model::Logger.create(:project_id => project.id)
       task_result = Intrigue::Core::Model::TaskResult.create({
